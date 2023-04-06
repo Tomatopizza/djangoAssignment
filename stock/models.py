@@ -31,7 +31,7 @@ class Product(models.Model):
     code = models.CharField(max_length=100, null=True)
     name = models.CharField(max_length=100, null=True)
     description = models.CharField(max_length=100, null=True)
-    price = models.CharField(max_length=100, null=True)
+    price = models.IntegerField(default=0)
     sizes = (
         ('S', 'Small'),
         ('M', 'Medium'),
@@ -62,6 +62,12 @@ class Product(models.Model):
 
 # model
 class Inbound(models.Model):
+    class Meta:
+        db_table = "my_inbound"
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    num = models.IntegerField(default=0)
+    inbound_date = models.DateTimeField(auto_now_add=True)
+    money =  models.IntegerField(default=0)
     """
 		입고 모델입니다.
 		상품, 수량, 입고 날짜, 금액 필드를 작성합니다.
@@ -69,15 +75,27 @@ class Inbound(models.Model):
 
 # model
 class Outbound(models.Model):
-		"""
-		출고 모델입니다.
-		상품, 수량, 입고 날짜, 금액 필드를 작성합니다.
-		"""
-                
+    class Meta:
+        db_table = "my_outbound"
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    num = models.IntegerField(default=0)
+    outbound_date = models.DateTimeField(auto_now_add=True)
+    money =  models.IntegerField(default=0)
+    """
+    출고 모델입니다.
+    상품, 수량, 입고 날짜, 금액 필드를 작성합니다.
+    """
+            
 # model
 class Invetory(models.Model):
-	"""
-	창고의 제품과 수량 정보를 담는 모델입니다.
-	상품, 수량 필드를 작성합니다.
-	작성한 Product 모델을 OneToOne 관계로 작성합시다.
-	"""
+    class Meta:
+        db_table = "my_inventory"
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    num = models.IntegerField(default=0)
+
+
+"""
+창고의 제품과 수량 정보를 담는 모델입니다.
+상품, 수량 필드를 작성합니다.
+작성한 Product 모델을 OneToOne 관계로 작성합시다.
+"""
