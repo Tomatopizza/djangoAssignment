@@ -4,11 +4,21 @@ from .models import Product
 # view
 @login_required
 def product_list(request):
+	if request.method == 'GET':
+	    pass
+        # return render(request, 'user/signup.html')
+    elif request.method == 'POST':
+        pass
 	pass
     # 등록 된 상품의 리스트를 볼 수 있는 view
 
 @login_required
 def product_create(request):
+	if request.method == 'GET':
+	    pass
+        # return render(request, 'user/signup.html')
+    elif request.method == 'POST':
+        pass
 	pass
     # 상품 등록 view
 
@@ -16,6 +26,11 @@ def product_create(request):
 @login_required
 @transaction.atomic
 def inbound_create(request):
+	if request.method == 'GET':
+	    pass
+        # return render(request, 'user/signup.html')
+    elif request.method == 'POST':
+        pass
 	pass
     # 상품 입고 view
     # 입고 기록 생성
@@ -24,6 +39,11 @@ def inbound_create(request):
 
 @login_required
 def outbound_create(request, product_id):
+	if request.method == 'GET':
+	    pass
+        # return render(request, 'user/signup.html')
+    elif request.method == 'POST':
+        pass
 	pass
 		# 상품 출고 view
     # 출고 기록 생성
@@ -33,6 +53,11 @@ def outbound_create(request, product_id):
 # view
 @login_required
 def inventory(request):
+	if request.method == 'GET':
+	    pass
+        # return render(request, 'user/signup.html')
+    elif request.method == 'POST':
+        pass
 	pass
 	"""
 	inbound_create, outbound_create view에서 만들어진 데이터를 합산합니다.
