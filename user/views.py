@@ -40,15 +40,15 @@ def sign_in_view(request):
     if request.method == 'POST':
         username = request.POST.get('username',None)
         password = request.POST.get('password',None)
-        exist_user = auth.autehnticate(request, username=username, password=password)
-        if exist_user is not None:
-            auth.login(request, exist_user)
+        exist_user = UserModel.objects.get(username=username) #username이 같은 친구를 불러옴.
+        if exist_user.password == password:
+            request.session['user'] = exist_user.username
             return HttpResponse("로그인 성공")
         else:
             return redirect('/sign-in')
-
-
-    return render(request, 'user/signin.html')
+            # return HttpResponse("로그인 실패")
+    elif request.method == 'GET':
+        return render(request, 'user/signin.html')
 
 def user_login(request):
     pass
