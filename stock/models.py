@@ -59,3 +59,25 @@ class Product(models.Model):
         self.price = args[3]
         self.sizes = args[4]
         # 생성될 때 stock quantity를 0으로 초기화 로직
+
+# model
+class Inbound(models.Model):
+    """
+		입고 모델입니다.
+		상품, 수량, 입고 날짜, 금액 필드를 작성합니다.
+		"""
+
+# model
+class Outbound(models.Model):
+		"""
+		출고 모델입니다.
+		상품, 수량, 입고 날짜, 금액 필드를 작성합니다.
+		"""
+                
+# model
+class Invetory(models.Model):
+	"""
+	창고의 제품과 수량 정보를 담는 모델입니다.
+	상품, 수량 필드를 작성합니다.
+	작성한 Product 모델을 OneToOne 관계로 작성합시다.
+	"""
