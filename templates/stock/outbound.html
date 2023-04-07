@@ -11,12 +11,11 @@
                 <div>
                     {% for list in outbound %}
                     <ul>
-                        {% for list in outbound %}
                         <li>
+                            {{ list.name }}
                             {{ list.size }}
                             {{ list.num }}
                         </li>
-                        {% endfor %}
                     </ul>
                     {% endfor %}
                 </div>
