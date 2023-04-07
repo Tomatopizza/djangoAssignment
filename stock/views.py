@@ -24,10 +24,12 @@ def outbound(request):
         return render(request, 'stock/outbound.html', {'outbound': all_product})
     elif request.method == 'POST':
         number = request.POST.get('number',None)
+        code = request.POST.get('code',None)
         size = request.POST.get('size',None)
-        exist_proudct = Product.objects.get(size=size)
-        exist_proudct.num -= int(number)
-        exist_proudct.save()
+        code_proudct = Product.objects.filter(code=code)
+        size_proudct = code_proudct.objects.get(size=size)
+        size_proudct.num -= int(number)
+        size_proudct.save()
         all_product = Product.objects.all()
         return render(request, 'stock/outbound.html', {'outbound': all_product})
 

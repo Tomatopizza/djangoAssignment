@@ -5,6 +5,17 @@ from django.db import models
 class Product(models.Model):
     class Meta:
         db_table ="my_product"
+    
+    codes = (
+        ('hood1', 'fancy hood'),
+        ('hood2', 'pretty hood'),
+        ('hood3', 'hice hood'),
+        ('socks', 'socks'),
+        ('jeans', 'new jeans'),
+    )
+    name = models.CharField(default = 'fancy hood',max_length=100)
+    description = models.TextField(default = "write anything")
+    price = models.IntegerField(default=0)
     num = models.IntegerField(default=0)
     sizes = (
         ('S', 'Small'),
@@ -12,6 +23,7 @@ class Product(models.Model):
         ('L', 'Large'),
         ('F', 'Free'),
     )
+    code = models.CharField(choices=codes, default='hood1', max_length=5)
     size = models.CharField(choices=sizes, max_length=1)
     """
     상품 모델입니다.
