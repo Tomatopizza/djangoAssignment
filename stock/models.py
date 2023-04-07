@@ -49,6 +49,20 @@ class Inbound(models.Model):
         db_table ="my_inbound"
     sizes = models.OneToOneField("Product", on_delete=models.CASCADE)
     num = models.IntegerField(default=0)
+
+
+class Outbound(models.Model):
+    class Meta:
+        db_table ="my_outbound"
+    sizes = models.OneToOneField("Product", on_delete=models.CASCADE)
+    num = models.IntegerField(default=0)
+
+class Inventory(models.Model):
+    class Meta:
+        db_table ="my_inventory"
+    sizes = models.OneToOneField("Product", on_delete=models.CASCADE)
+    num = models.IntegerField(default=0)
+    
     """
 		입고 모델입니다.
 		상품, 수량, 입고 날짜, 금액 필드를 작성합니다.

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}  <!--base.html을 확장해 그 아래에 signup.html 파일을 추가해 주겠다.-->
+
+{% block title %}
+    재고
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 재고</h2>
+            <form class="form-area" method="post" action="/outbound/">
+                <div>
+                    {% for list in inventory %}
+                    <ul>
+                        <li>
+                            {{ list.size }}
+                            {{ list.num }}
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+                {% csrf_token %}
+                <hr>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}  <!--base.html을 확장해 그 아래에 signup.html 파일을 추가해 주겠다.-->
+
+{% block title %}
+    출고
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 출고</h2>
+            <form class="form-area" method="post" action="/outbound/">
+                <div>
+                    {% for list in outbound %}
+                    <ul>
+                        <li>
+                            {{ list.size }}
+                            {{ list.num }}
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+                {% csrf_token %}
+                <div class="form-group mt-2 mb-2">
+                    <label for="number">숫자</label>
+                    <input type="number" class="form-control" id="number" name="number">
+                </div>
+                <div>
+                    <label for="option">옵션을 선택해주세요</label>
+                    <select name="size" id="size">
+                      <option value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                      <option value="F">F</option>
+                    </select>
+                  </div>
+
+                <hr>
+            </form>
+        </div>
+    </div>
+{% endblock %}
