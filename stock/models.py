@@ -3,10 +3,21 @@ from django.db import models
 # Create your models here.
 # model
 class Product(models.Model):
+    class Meta:
+        db_table ="my_product"
+    num = models.IntegerField(default=0)
+    sizes = (
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('F', 'Free'),
+    )
+    size = models.CharField(choices=sizes, max_length=1)
     """
     상품 모델입니다.
     상품 코드, 상품 이름, 상품 설명, 상품 가격, 사이즈 필드를 가집니다.
     """
+'''
     code = 
     name = 
     description = 
@@ -17,6 +28,7 @@ class Product(models.Model):
         ('L', 'Large'),
         ('F', 'Free'),
     )
+
     size = models.CharField(choices=sizes, max_length=1)
 		"""
 		choices 매개변수는 Django 모델 필드에서 사용하는 매개변수 중 하나로 
@@ -30,14 +42,18 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         # 생성될 때 stock quantity를 0으로 초기화 로직
-
+'''
 # model
 class Inbound(models.Model):
+    class Meta:
+        db_table ="my_inbound"
+    sizes = models.OneToOneField("Product", on_delete=models.CASCADE)
+    num = models.IntegerField(default=0)
     """
 		입고 모델입니다.
 		상품, 수량, 입고 날짜, 금액 필드를 작성합니다.
 		"""
-    
+'''
 # model
 class Outbound(models.Model):
 		"""
@@ -52,3 +68,4 @@ class Invetory(models.Model):
 	상품, 수량 필드를 작성합니다.
 	작성한 Product 모델을 OneToOne 관계로 작성합시다.
 	"""
+'''
