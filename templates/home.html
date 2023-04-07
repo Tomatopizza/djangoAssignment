@@ -1,0 +1,30 @@
+{% extends 'base.html' %}  <!--base.html을 확장해 그 아래에 signup.html 파일을 추가해 주겠다.-->
+
+{% block title %}
+    Home
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> Home </h2>
+            <form class="form-area" method="post" action="">
+                {% csrf_token %}
+                <div>
+                    <a href="/inbound" class="btn btn-secondary">입고 페이지로</a>
+                </div>
+                <div>
+                    <a href="/outbound" class="btn btn-secondary">출고 페이지로</a>
+                </div>
+                <div>
+                    <a href="/inventory" class="btn btn-secondary">재고 페이지로</a>
+                </div>
+                <div>
+                    <a href="/sign-in" class="btn btn-secondary">로그인</a>
+                </div>
+                <div>
+                    <a href="/sign-up" class="btn btn-secondary">회원가입</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
