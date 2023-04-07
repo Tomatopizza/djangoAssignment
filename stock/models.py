@@ -59,21 +59,29 @@ class Product(models.Model):
 class Inbound(models.Model):
     class Meta:
         db_table ="my_inbound"
-    sizes = models.OneToOneField("Product", on_delete=models.CASCADE)
+    product = models.OneToOneField("Product", on_delete=models.CASCADE)
     num = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    price = models.IntegerField(default=0)
 
 
 class Outbound(models.Model):
     class Meta:
         db_table ="my_outbound"
-    sizes = models.OneToOneField("Product", on_delete=models.CASCADE)
+    product = models.OneToOneField("Product", on_delete=models.CASCADE)
     num = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    price = models.IntegerField(default=0)
 
 class Inventory(models.Model):
     class Meta:
         db_table ="my_inventory"
-    sizes = models.OneToOneField("Product", on_delete=models.CASCADE)
+    product = models.OneToOneField("Product", on_delete=models.CASCADE)
     num = models.IntegerField(default=0)
+    price = models.IntegerField(default=0)
+    total_inbound = models.IntegerField(default=0)
+    total_outbound = models.IntegerField(default=0)
+    
     
     """
 		입고 모델입니다.

@@ -10,11 +10,20 @@ def inbound(request):
         all_product = Product.objects.all()
         return render(request, 'stock/inbound.html', {'inbound': all_product})
     elif request.method == 'POST':
+        
         number = request.POST.get('number',None)
+        code = request.POST.get('code',None)
         size = request.POST.get('size',None)
-        exist_proudct = Product.objects.get(size=size)
-        exist_proudct.num += int(number)
-        exist_proudct.save()
+        all_product = Product.objects.all()
+        all_inbound = Outbound.objects.all()
+        code_inbound = all_inbound.get(product=size_proudct)
+        # size_inbound = code_inbound.get(size=size)
+        code_proudct = all_product.filter(Q(code=code))
+        size_proudct = code_proudct.get(size=size)
+        code_inbound.num += int(number)
+        size_proudct.num += int(number)
+        size_proudct.save()
+        code_inbound.save()
         all_product = Product.objects.all()
         return render(request, 'stock/inbound.html', {'inbound': all_product})
         
@@ -23,24 +32,50 @@ def outbound(request):
         all_product = Product.objects.all()
         return render(request, 'stock/outbound.html', {'outbound': all_product})
     elif request.method == 'POST':
-        all_product = Product.objects.all()
         number = request.POST.get('number',None)
         code = request.POST.get('code',None)
         size = request.POST.get('size',None)
+        all_outbound = Outbound.objects.all()
+        all_product = Product.objects.all()
+        
         code_proudct = all_product.filter(Q(code=code))
         size_proudct = code_proudct.get(size=size)
+        print(size_proudct)
+        code_outbound = all_outbound.get(product=size_proudct)
+        #size_outbound = code_outbound.get()
+        if size_proudct.num < int(number):
+            return HttpResponse("Too Many!")
         size_proudct.num -= int(number)
+        code_outbound.num += int(number)
         size_proudct.save()
+
+        code_outbound.save()
         all_product = Product.objects.all()
         return render(request, 'stock/outbound.html', {'outbound': all_product})
 
 def inventory(request):
     if request.method == 'GET':
+        all_outbound = Outbound.objects.all()
+        all_inbound = Inbound.objects.all()
         all_product = Product.objects.all()
-        return render(request, 'stock/inventory.html', {'inventory': all_product})
+        total_outbound_price = 0
+        total_inbound_price = 0
+        for i in all_outbound:
+            for j in range(i.num):
+                total_outbound_price += i.price
+        for i in all_inbound:
+            for j in range(i.num):
+                total_inbound_price += i.price
+        return render(request, 'stock/inventory.html',  context={'outbound': all_outbound, 'inventory': all_product, 'inbound': all_inbound, 'total_outbound_price': total_outbound_price, 'total_inbound_price': total_inbound_price})
     elif request.method == 'POST':
+        all_outbound = Outbound.objects.all()
+        # code_outbound = all_outbound.filter(Q(code=code))
+        # size_outbound = code_outbound.get(size=size)
+        all_inbound = Inbound.objects.all()
+        # code_inbound = all_inbound.filter(Q(code=code))
+        # size_inbound = code_inbound.get(size=size)
         all_product = Product.objects.all()
-        return render(request, 'stock/inventory.html', {'inventory': all_product})
+        return render(request, 'stock/inventory.html', context={'outbound': all_outbound, 'inventory': all_product, 'inbound': all_inbound})
 
 def first_view(request):
     return render(request, 'calc.html')

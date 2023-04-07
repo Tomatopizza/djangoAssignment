@@ -8,17 +8,7 @@
         <div class="wrap">
             <h2 class="title-center"> 출고</h2>
             <form class="form-area" method="post" action="/outbound/">
-                <div>
-                    {% for list in outbound %}
-                    <ul>
-                        <li>
-                            {{ list.name }}
-                            {{ list.size }}
-                            {{ list.num }}
-                        </li>
-                    </ul>
-                    {% endfor %}
-                </div>
+                
                 {% csrf_token %}
                 <div class="form-group mt-2 mb-2">
                     <label for="number">숫자</label>
@@ -43,7 +33,18 @@
                       <option value="F">F</option>
                     </select>
                   </div>
-
+                  <div>
+                    {% for list in outbound %}
+                    <ul>
+                        <li>
+                            이름 {{ list.name }}
+                            사이즈 {{ list.size }}
+                            재고 {{ list.num }}
+                            가격 {{ list.price }}
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
                 <hr>
             </form>
         </div>

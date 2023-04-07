@@ -6,17 +6,50 @@
 {% block content %}
     <div class="container">
         <div class="wrap">
-            <h2 class="title-center"> 재고</h2>
-            <form class="form-area" method="post" action="/outbound/">
+            <form class="form-area" method="post" action="/inventory/">
                 <div>
-                    {% for list in inventory %}
-                    <ul>
-                        <li>
-                            {{ list.size }}
-                            {{ list.num }}
-                        </li>
-                    </ul>
-                    {% endfor %}
+                    <h2 class="title-center"> 총입고 상품가 {{total_inbound_price}}</h2>
+                    <form class="form-area" method="post" action="/inventory/"></form>
+                    <div>
+                        {% for list in inbound %}
+                        <ul>
+                            <li>
+                                이름 {{ list.product.name }}
+                                사이즈 {{ list.product.size }}
+                                출고횟수 {{ list.num }}
+                                출고가 {{ list.price }}
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    <h2 class="title-center"> 총출고 상품가 {{total_outbound_price}}</h2>
+                    <form class="form-area" method="post" action="/inventory/"></form>
+                    <div>
+                        {% for list in outbound %}
+                        <ul>
+                            <li>
+                                이름 {{ list.product.name }}
+                                사이즈 {{ list.product.size }}
+                                출고횟수 {{ list.num }}
+                                출고가 {{ list.price }}
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    <h2 class="title-center"> 재고</h2>
+                    <form class="form-area" method="post" action="/inventory/"></form>
+                    <div>
+                        {% for list in inventory %}
+                        <ul>
+                            <li>
+                                이름 {{ list.name }}
+                                사이즈 {{ list.size }}
+                                재고 {{ list.num }}
+                                가격 {{ list.price }}
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </div>
                 </div>
                 {% csrf_token %}
                 <hr>

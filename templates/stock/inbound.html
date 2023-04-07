@@ -8,11 +8,22 @@
         <div class="wrap">
             <h2 class="title-center"> 입고</h2>
             <form class="form-area" method="post" action="/inbound/">
+                
                 {% csrf_token %}
                 <div class="form-group mt-2 mb-2">
                     <label for="number">숫자</label>
                     <input type="number" class="form-control" id="number" name="number">
                 </div>
+                <div>
+                    <label for="option">옵션을 선택해주세요</label>
+                    <select name="code" id="code">
+                      <option value="hood1">fancy hood</option>
+                      <option value="hood2">pretty hood</option>
+                      <option value="hood3">nice hood</option>
+                      <option value="socks">socks</option>
+                      <option value="jeans">new jeans</option>
+                    </select>
+                  </div>
                 <div>
                     <label for="option">옵션을 선택해주세요</label>
                     <select name="size" id="size">
@@ -22,12 +33,14 @@
                       <option value="F">F</option>
                     </select>
                   </div>
-                <div>
+                  <div>
                     {% for list in inbound %}
                     <ul>
                         <li>
-                            {{ list.size }}
-                            {{ list.num }}
+                            이름 {{ list.name }}
+                            사이즈 {{ list.size }}
+                            재고 {{ list.num }}
+                            가격 {{ list.price }}
                         </li>
                     </ul>
                     {% endfor %}
