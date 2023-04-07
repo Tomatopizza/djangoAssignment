@@ -9,6 +9,9 @@ class ProductForm(forms.ModelForm):
         
 # form
 class InboundForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'code', 'description', 'price', 'size']
 		"""
 		Django로 개발을 할때,
 		Model과 Form을 사용하지 않으면 Django를 사용하는 의미가 없다고 말할 정도로 
@@ -18,3 +21,4 @@ class InboundForm(forms.ModelForm):
 
 # form
 class OutboundForm(forms.ModelForm):
+     pass

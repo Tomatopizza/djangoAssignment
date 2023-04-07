@@ -23,12 +23,14 @@ class Product(models.Model):
     상품 모델입니다.
     상품 코드, 상품 이름, 상품 설명, 상품 가격, 사이즈 필드를 가집니다.
     """
-    # product = (
-    #     ('hood-001', 'Super hood'),
-    #     ('hood-002', 'Ultra hood'),
-    #     ('hood-003', 'Super Ultra hood'),
-    # )
-    code = models.CharField(max_length=100, null=True)
+    codes = (
+        ('hood-001', 'Super hood'),
+        ('hood-002', 'Ultra hood'),
+        ('hood-003', 'Super Ultra hood'),
+        ('socks-001', 'Socks'),
+        ('jean-001', 'Jean'),
+    )
+    code = models.CharField(choices=codes, max_length=9, default='hood-001')
     name = models.CharField(max_length=100, null=True)
     description = models.CharField(max_length=100, null=True)
     price = models.IntegerField(default=0)
@@ -52,19 +54,19 @@ class Product(models.Model):
     def __str__(self):
         return self.code
 
-    def save(self, *args, **kwargs):
-        self.code = args[0]
-        self.name = args[1]
-        self.description = args[2]
-        self.price = args[3]
-        self.sizes = args[4]
+    # def save(self, *args, **kwargs):
+    #     self.code = args[0]
+    #     self.name = args[1]
+    #     self.description = args[2]
+    #     self.price = args[3]
+    #     self.sizes = args[4]
         # 생성될 때 stock quantity를 0으로 초기화 로직
 
 # model
 class Inbound(models.Model):
     class Meta:
         db_table = "my_inbound"
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     num = models.IntegerField(default=0)
     inbound_date = models.DateTimeField(auto_now_add=True)
     money =  models.IntegerField(default=0)
@@ -77,7 +79,7 @@ class Inbound(models.Model):
 class Outbound(models.Model):
     class Meta:
         db_table = "my_outbound"
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
     num = models.IntegerField(default=0)
     outbound_date = models.DateTimeField(auto_now_add=True)
     money =  models.IntegerField(default=0)
@@ -91,7 +93,10 @@ class Invetory(models.Model):
     class Meta:
         db_table = "my_inventory"
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    # num_in = models.ForeignKey(Inbound, on_delete=models.CASCADE)
+    # num_out = models.ForeignKey(Outbound, on_delete=models.CASCADE)
     num = models.IntegerField(default=0)
+
 
 
 """
