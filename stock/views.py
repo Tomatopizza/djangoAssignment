@@ -77,8 +77,8 @@ def inventory(request):
         all_product = Product.objects.all()
         return render(request, 'stock/inventory.html', context={'outbound': all_outbound, 'inventory': all_product, 'inbound': all_inbound})
 
-def first_view(request):
-    return render(request, 'calc.html')
+
+        # do update
 # Create your views here.
         
 

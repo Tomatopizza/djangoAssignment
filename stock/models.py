@@ -25,6 +25,15 @@ class Product(models.Model):
     )
     code = models.CharField(choices=codes, default='hood1', max_length=5)
     size = models.CharField(choices=sizes, max_length=1)
+    def save(self, *args, **kwargs):
+        all_product = Product.objects.all()
+        if not self.id:
+            
+            pass
+            # do create
+        else:
+            all_pProduct
+            pass
     """
     상품 모델입니다.
     상품 코드, 상품 이름, 상품 설명, 상품 가격, 사이즈 필드를 가집니다.
